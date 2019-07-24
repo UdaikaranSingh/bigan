@@ -42,6 +42,7 @@ else:
     encoder = Encoder(latent_size= latent_size)
 
 if os.path.exists("discriminator_model.pth"):
+    print("Loading in Model")
     genload = torch.load('generator_model.pth')
     discrimload = torch.load('discriminator_model.pth')
     encodload = torch.load("encoder_model.pth")
