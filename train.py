@@ -121,8 +121,8 @@ for epoch in range(num_epochs):
             loss_d = -torch.mean(torch.log(z_output + epsilon) + torch.log(1-x_output + epsilon))
             loss_pq = -torch.mean(torch.log(x_output + epsilon) + torch.log(1-z_output + epsilon))
 
-            discriminator_loss.append(loss_d.item())
-            generator_loss.append(loss_d.item())
+            discriminator_loss.append(loss_d.item)
+            generator_loss.append(loss_d.item)
 
             #backpropagation
             loss_d.backward(retain_graph = True)
