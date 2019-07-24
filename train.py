@@ -47,9 +47,9 @@ if os.path.exists("discriminator_model.pth"):
     discrimload = torch.load('discriminator_model.pth')
     encodload = torch.load("encoder_model.pth")
     
-    generator.load_state_dict(genload['state_dict'])
-    discriminator.load_state_dict(discrimload['state_dict'])
-    encoder.load_state_dict(encodload['state_dict'])
+    generator.load_state_dict(genload)
+    discriminator.load_state_dict(discrimload)
+    encoder.load_state_dict(encodload)
 
 
 transform = transforms.Compose([transforms.CenterCrop((1200, 1200)),
