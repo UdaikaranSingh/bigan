@@ -26,6 +26,8 @@ else:
     print("Using CPU")
 
 
+
+
 if cuda_available:
     generator = Generator(latent_size= latent_size).cuda()
     discriminator = Discriminator(latent_size= latent_size,
@@ -38,6 +40,15 @@ else:
                               dropout= drouput_p, 
                               output_size= 1)
     encoder = Encoder(latent_size= latent_size)
+
+if os.path.exists("discriminator_model.pth"):
+    genload = torch.load('generator_model.pth')
+    discrimload = torch.load('discriminator_model.pth')
+    encodload = torch.load("encoder_model.pth")
+    
+    generator.load_state_dict(genload['state_dict'])
+    discriminator.load_state_dict(discrimload['state_dict'])
+    encoder.load_state_dict(encodload['state_dict'])
 
 
 transform = transforms.Compose([transforms.CenterCrop((1200, 1200)),
@@ -130,12 +141,10 @@ for epoch in range(num_epochs):
             loss_pq.backward()
             optimizer_pq.step()
     
-    path = "generator_model"
-    torch.save(generator, path)
-    path = "encoder_model"
-    torch.save(encoder, path)
-    path = "discriminator_model"
-    torch.save(discriminator, path)
-    
-    plt.imshow(generated_image)
+    path = "generator_model.pth"
+    torch.save(generator.state_dict(), path)
+    path = "encoder_model.pth"
+    torch.save(encoder.state_dict(), path)
+    path = "discriminator_model.pth"
+    torch.save(discriminator.state_dict(), path)
     
