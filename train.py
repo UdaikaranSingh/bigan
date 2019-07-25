@@ -133,7 +133,7 @@ for epoch in range(num_epochs):
             x_hat = generator(z_random) #generated images 
             #output size: (batch size x 3 x 64 x 64)
             z_hat = encoder(x_real) #mapping from images back to latent space
-            #output size: (batch size x latent space x 1 x 1)
+            #output size: (batch size x latent size x 1 x 1)
 
 
 
