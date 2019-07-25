@@ -66,7 +66,8 @@ else:
 
 transform = transforms.Compose([transforms.CenterCrop((1200, 1200)),
                                 transforms.Resize((64,64)),
-                                transforms.ToTensor()])
+                                transforms.ToTensor(),
+                                transforms.Normalize([0.5], [0.5])])
 
 
 #######################################
