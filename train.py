@@ -34,6 +34,18 @@ if cuda_available:
                               dropout= drouput_p, 
                               output_size= 1).cuda()
     encoder = Encoder(latent_size= latent_size).cuda()
+
+    if os.path.exists("discriminator_model.pth"):
+        print("Loading in Model")
+        genload = torch.load('generator_model.pth', map_location='cpu')
+        discrimload = torch.load('discriminator_model.pth', map_location='cpu')
+        encodload = torch.load("encoder_model.pth", map_location='cpu')
+        
+        generator.load_state_dict(genload)
+        discriminator.load_state_dict(discrimload)
+        encoder.load_state_dict(encodload)
+
+
 else:
     generator = Generator(latent_size= latent_size)
     discriminator = Discriminator(latent_size= latent_size,
@@ -41,21 +53,20 @@ else:
                               output_size= 1)
     encoder = Encoder(latent_size= latent_size)
 
-if os.path.exists("discriminator_model.pth"):
-    print("Loading in Model")
-    genload = torch.load('generator_model.pth')
-    discrimload = torch.load('discriminator_model.pth')
-    encodload = torch.load("encoder_model.pth")
-    
-    generator.load_state_dict(genload)
-    discriminator.load_state_dict(discrimload)
-    encoder.load_state_dict(encodload)
+    if os.path.exists("discriminator_model.pth"):
+        print("Loading in Model")
+        genload = torch.load('generator_model.pth')
+        discrimload = torch.load('discriminator_model.pth')
+        encodload = torch.load("encoder_model.pth")
+        
+        generator.load_state_dict(genload)
+        discriminator.load_state_dict(discrimload)
+        encoder.load_state_dict(encodload)
 
 
 transform = transforms.Compose([transforms.CenterCrop((1200, 1200)),
                                 transforms.Resize((64,64)),
-                                transforms.ToTensor(),
-                                transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+                                transforms.ToTensor()])
 
 
 #######################################
