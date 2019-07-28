@@ -37,9 +37,9 @@ if cuda_available:
 
     if os.path.exists("discriminator_model.pth"):
         print("Loading in Model")
-        genload = torch.load('generator_model.pth', map_location='cpu')
-        discrimload = torch.load('discriminator_model.pth', map_location='cpu')
-        encodload = torch.load("encoder_model.pth", map_location='cpu')
+        genload = torch.load('generator_model.pth')
+        discrimload = torch.load('discriminator_model.pth')
+        encodload = torch.load("encoder_model.pth")
         
         generator.load_state_dict(genload)
         discriminator.load_state_dict(discrimload)
@@ -59,9 +59,9 @@ else:
         discrimload = torch.load('discriminator_model.pth')
         encodload = torch.load("encoder_model.pth")
         
-        generator.load_state_dict(genload)
-        discriminator.load_state_dict(discrimload)
-        encoder.load_state_dict(encodload)
+        generator.load_state_dict(genload, map_location='cpu')
+        discriminator.load_state_dict(discrimload, map_location='cpu')
+        encoder.load_state_dict(encodload, map_location='cpu')
 
 
 transform = transforms.Compose([transforms.CenterCrop((1200, 1200)),
