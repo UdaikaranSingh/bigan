@@ -79,7 +79,7 @@ random.seed(1)
 learning_rate = 0.2e-4
 beta1 = 0.5
 beta2 = 0.999
-num_epochs = 30
+num_epochs = 25
 epsilon = 1e-8
 
 optimizer_d = optim.Adam(discriminator.parameters(), 
